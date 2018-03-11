@@ -1,0 +1,6 @@
+server:
+    port: 8888
+storage:
+    storage.manager.class: com.drest.storage.mysql.MysqlStorageManagerImpl
+    provider.class: com.drest.storage.mysql.service.impl.MysqlStorageServiceFacade
+    db.config.file: application.properties
