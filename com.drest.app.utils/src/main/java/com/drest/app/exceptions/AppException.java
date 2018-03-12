@@ -12,7 +12,7 @@ public class AppException extends Throwable {
 	private static final long serialVersionUID = 1L;
 
 	public static enum ERROR_CODE {
-		REST_001, ENGINE_001, SERVICE_001, DB_001
+		REST_001, ENGINE_001, ENGINE_002, SERVICE_001, DB_001, CRYPT_MD5_001, LOGIN_001, LOGIN_002, UTILS_001
 	}
 
 	private ERROR_CODE exceptionCode = null;

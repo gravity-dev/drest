@@ -27,19 +27,25 @@ public class Engine {
 	private IStorageManager storageManager;
 	private IStorageService storageService;
 
+	private String passPhrase = null;
+
 	/**
 	 * Get engine instance
 	 * 
 	 * @return
 	 */
-	public static Engine getInstance() throws Exception {
+	public static Engine getInstance() throws AppException {
 		if (engine == null) {
 			try {
 				engine = new Engine();
-				EngineLoggerFactory.info("********************* ENGINE STARTED *********************");
+				EngineLoggerFactory
+						.info("********************* ENGINE STARTED *********************");
 			} catch (Exception ex) {
-				EngineLoggerFactory.severe("ENGINE FAILED TO START");
-				throw new Exception("--------------------- ENGINE FAILED TO START ---------------------", ex);
+				EngineLoggerFactory.severe("ENGINE FAILED TO INSTANTIATE");
+				throw new AppException(
+						ERROR_CODE.ENGINE_002,
+						"--------------------- ENGINE FAILED TO INSTANTIATE ---------------------",
+						ex);
 			}
 		}
 		return engine;
@@ -60,7 +66,8 @@ public class Engine {
 				throw ex;
 			}
 		} else {
-			AppException ex = new AppException(ERROR_CODE.ENGINE_001, "ENGINE NOT INSTANTIATED YET", null);
+			AppException ex =
+					new AppException(ERROR_CODE.ENGINE_001, "ENGINE NOT INSTANTIATED YET", null);
 			ex.log();
 			throw ex;
 		}
@@ -82,17 +89,27 @@ public class Engine {
 	private void startUpStorage() throws Exception {
 		ApplicationConfig appConfig = new ApplicationConfig(
 				YamlReader.parseYamlResource(Engine.class, APPLICATION_CONFIG_FILE));
-		
-		storageManager = instantiate(appConfig.getStorageConfig().getStorageManagerClass(), IStorageManager.class);
-		
+
+		passPhrase = appConfig.getEncryptionSalt();
+		storageManager = instantiate(
+				appConfig.getStorageConfig().getStorageManagerClass(),
+				IStorageManager.class);
+
 		storageManager.initialize(appConfig.getStorageConfig().getDbConfigFilePath());
-		EngineLoggerFactory.info("Loaded Storage Manager : " + appConfig.getStorageConfig().getProviderClass());
+		EngineLoggerFactory.info(
+				"Loaded Storage Manager : " + appConfig.getStorageConfig().getProviderClass());
 
-		storageService = instantiate(appConfig.getStorageConfig().getProviderClass(), IStorageService.class)
-				.instance();
-		EngineLoggerFactory.info("Loaded Storage Service : " + appConfig.getStorageConfig().getProviderClass());
+		storageService =
+				instantiate(appConfig.getStorageConfig().getProviderClass(), IStorageService.class)
+						.instance();
+		EngineLoggerFactory.info(
+				"Loaded Storage Service : " + appConfig.getStorageConfig().getProviderClass());
 
-			}
+	}
+
+	public String getEncyptionSalt() {
+		return this.passPhrase;
+	}
 
 	/**
 	 * Get engine storage manager

@@ -20,6 +20,15 @@ public final class ApplicationConfig {
 	public StorageConfig getStorageConfig() {
 		return new StorageConfig((Map<String, Object>) config.get("storage"));
 	}
+
+	/**
+	 * Get secret encryption salt pass-phrase
+	 * 
+	 * @return
+	 */
+	public String getEncryptionSalt() {
+		return (String) this.config.get("secret.key");
+	}
 }
 
 class StorageConfig {
@@ -38,7 +47,7 @@ class StorageConfig {
 	public String getStorageManagerClass() {
 		return storageManagerClass;
 	}
-	
+
 	public String getProviderClass() {
 		return providerClass;
 	}

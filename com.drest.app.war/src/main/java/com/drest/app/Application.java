@@ -38,7 +38,6 @@ public class Application extends SpringBootServletInitializer {
 			@Override
 			public void run(String... arg0) throws Exception {
 				try {
-					System.out.println("Our jdbc template is = " + jdbcTemplate);
 					Engine engine = Engine.getInstance();
 					engine.boot();
 					((MysqlStorageServiceFacade) engine.getStorageService()).setTemplate(jdbcTemplate);

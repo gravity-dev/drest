@@ -22,16 +22,18 @@ CREATE TABLE locations (
 -- USER ACCOUNT
 CREATE TABLE users (
   id int(11) NOT NULL AUTO_INCREMENT,
-  password varchar(128) NOT NULL,
-  is_system_user tinyint(1) NOT NULL,
   name varchar(30) NOT NULL,
+  password varchar(64) NOT NULL,
   first_name varchar(30) NOT NULL,
   last_name varchar(30) NOT NULL,
   email varchar(75) NOT NULL,
+  phone_code varchar(12) NOT NULL,
+  phone varchar(32) NOT NULL,
+  is_system_user tinyint(1) NOT NULL DEFAULT 0,
   is_active tinyint(1) NOT NULL,
   created_on datetime NOT NULL,
   last_updated datetime NOT NULL,
-  location_id int(11),
+  location_id int(11) NOT NULL,
   PRIMARY KEY (id),
   UNIQUE KEY username_key (name),
   FOREIGN KEY (location_id) REFERENCES locations(id)
