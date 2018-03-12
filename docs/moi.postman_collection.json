@@ -1,0 +1,107 @@
+{
+	"info": {
+		"name": "moi",
+		"_postman_id": "2fbf6071-f220-4e64-b331-2451e157a9b6",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "getUser",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8888/moi/user/exists?name=sampleuser",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"moi",
+						"user",
+						"exists"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "sampleuser",
+							"equals": true
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "addUser",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"sampleuser\",\r\n    \"password\": \"Password@123\",\r\n    \"firstName\": \"User1\",\r\n    \"lastName\": \"Sample\",\r\n    \"email\": \"sampleuser@vsarada.com\",\r\n    \"phoneCode\" : \"+91\",\r\n    \"phone\" : \"9923457865\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8888/moi/user/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"moi",
+						"user",
+						"add"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "loginUser",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"sampleuser\",\r\n    \"password\": \"Password@123\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8888/moi/user/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"moi",
+						"user",
+						"login"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
